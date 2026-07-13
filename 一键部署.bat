@@ -19,12 +19,10 @@ echo Pushed OK.
 
 echo.
 echo [2/3] SSH deploy...
-ssh -o StrictHostKeyChecking=no root@121.196.228.254 "cd /opt/robot-lab && bash deploy.sh"
+sshpass -p "@Lk15761253011" ssh -o StrictHostKeyChecking=no root@121.196.228.254 "cd /opt/robot-lab && bash deploy.sh"
 if errorlevel 1 (
     echo.
-    echo SSH failed. Run manually:
-    echo   ssh root@121.196.228.254
-    echo   cd /opt/robot-lab ^&^& bash deploy.sh
+    echo SSH failed. Check network or server.
     pause
     exit /b 1
 )
@@ -33,4 +31,4 @@ echo.
 echo [3/3] Done!
 echo   http://gzmzdxwlyjdgcxysys.top
 echo ========================================
-pause
+timeout /t 5
