@@ -6,7 +6,7 @@
 set -e
 
 # ---- 配置 ----
-GITHUB_REPO="https://github.com/3084589601/RL-SPME-GZMU.git"
+GITHUB_REPO="https://github.com/3084589601/RL-SPME.git"
 PROJECT_DIR="/opt/robot-lab"
 SERVICE_NAME="robot-lab"
 DOMAIN="gzmzdxwlyjdgcxysys.top"
