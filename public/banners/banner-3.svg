@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 600" fill="none">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="1920" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#064e3b"/>
+      <stop offset="0.5" stop-color="#047857"/>
+      <stop offset="1" stop-color="#10b981"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="600" fill="url(#bg3)"/>
+  <circle cx="1500" cy="400" r="220" fill="#34d399" opacity="0.12"/>
+  <rect x="1150" y="160" width="320" height="240" rx="12" fill="#065f46" opacity="0.6" stroke="#6ee7b7" stroke-width="2"/>
+  <rect x="1180" y="190" width="80" height="60" rx="4" fill="#059669"/>
+  <rect x="1280" y="190" width="80" height="60" rx="4" fill="#059669"/>
+  <rect x="1180" y="270" width="180" height="80" rx="4" fill="#047857" stroke="#a7f3d0" stroke-width="1"/>
+  <text x="120" y="250" fill="white" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="52" font-weight="700">STM32 嵌入式开发</text>
+  <text x="120" y="320" fill="#a7f3d0" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="26">单片机控制 · 传感器驱动 · 通信协议</text>
+  <text x="120" y="380" fill="#6ee7b7" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18" opacity="0.85">丰富的模板例程与学习资源库</text>
+</svg>

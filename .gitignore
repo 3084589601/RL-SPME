@@ -1,0 +1,7 @@
+node_modules/
+.next/
+uploads/
+*.db
+.env
+.DS_Store
+.vercel

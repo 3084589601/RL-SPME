@@ -1,0 +1,188 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  MEMBER
+  GUEST
+}
+
+enum ResourceStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model User {
+  id            String          @id @default(cuid())
+  username      String          @unique
+  password      String
+  name          String
+  email         String?
+  role          Role            @default(MEMBER)
+  avatar        String?
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  resources     Resource[]
+  comments      Comment[]
+  danmakus      Danmaku[]
+  downloadLogs  DownloadLog[]
+  studySessions StudySession[]
+  resourceProgress ResourceProgress[]
+  resourceViewLogs ResourceViewLog[]
+  invoices     Invoice[]
+}
+
+model Resource {
+  id          String         @id @default(cuid())
+  title       String
+  description String?
+  type        String
+  category    String
+  status      ResourceStatus @default(PENDING)
+  filePath    String?
+  fileName    String?
+  fileSize    Int?
+  videoUrl    String?
+  coverUrl    String?
+  competition String?
+  year        Int?
+  isPlaylist  Boolean        @default(false)
+  playlistItems String?      @default("[]")
+  authorId    String
+  author      User           @relation(fields: [authorId], references: [id])
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  comments    Comment[]
+  danmakus    Danmaku[]
+  downloadLogs DownloadLog[]
+  studySessions StudySession[]
+  progressRecords ResourceProgress[]
+  viewLogs    ResourceViewLog[]
+}
+
+model Comment {
+  id         String   @id @default(cuid())
+  content    String
+  resourceId String
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model Danmaku {
+  id         String   @id @default(cuid())
+  content    String
+  time       Float
+  color      String   @default("#FFFFFF")
+  mode       String   @default("scroll")
+  resourceId String
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+
+  @@index([resourceId, time])
+}
+
+model DownloadLog {
+  id         String   @id @default(cuid())
+  resourceId String
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  userId     String
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now())
+}
+
+model StudySession {
+  id         String        @id @default(cuid())
+  userId     String
+  user       User          @relation(fields: [userId], references: [id])
+  category   String
+  resourceId String?
+  resource   Resource?     @relation(fields: [resourceId], references: [id], onDelete: SetNull)
+  duration   Int
+  date       DateTime      @default(now())
+  note       String?
+}
+
+model ResourceProgress {
+  id           String   @id @default(cuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resourceId   String
+  resource     Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  progress     Int      @default(0)
+  completed    Boolean  @default(false)
+  liked        Boolean  @default(false)
+  favorited    Boolean  @default(false)
+  viewDuration Int      @default(0)
+  lastViewedAt DateTime?
+  episodeProgress String? @default("{}")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@unique([userId, resourceId])
+}
+
+model ResourceViewLog {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resourceId String
+  resource   Resource @relation(fields: [resourceId], references: [id], onDelete: Cascade)
+  duration   Int      @default(0)
+  viewedAt   DateTime @default(now())
+}
+
+model SiteContent {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  title     String?
+  content   String
+  updatedAt DateTime @updatedAt
+}
+
+model Certificate {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  imageUrl    String
+  year        Int?
+  row         Int      @default(0) // 第几排，从 0 开始
+  order       Int      @default(0) // 宫格内排序 0-5
+  position    String   @default("grid") // "left" 左侧竖版 | "grid" 右侧六宫格
+  createdAt   DateTime @default(now())
+}
+
+model Invoice {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fileName  String
+  filePath  String
+  fileSize  Int
+  createdAt DateTime @default(now())
+}
+
+model GalleryItem {
+  id              String   @id @default(cuid())
+  title           String
+  description     String?
+  imageUrl        String
+  type            String   @default("member")
+  year            Int?
+  order           Int      @default(0)
+  teamName        String?
+  teamPhotoUrl    String?
+  membersJson     String?
+  highlightsJson  String?
+  createdAt       DateTime @default(now())
+}

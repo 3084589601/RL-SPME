@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 600" fill="none">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="600" x2="1920" y2="0" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1e1b4b"/>
+      <stop offset="0.5" stop-color="#4c1d95"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="600" fill="url(#bg2)"/>
+  <circle cx="300" cy="300" r="180" fill="#a78bfa" opacity="0.15"/>
+  <rect x="1100" y="150" width="400" height="300" rx="16" fill="#312e81" opacity="0.5" stroke="#8b5cf6" stroke-width="2"/>
+  <rect x="1150" y="200" width="300" height="180" rx="8" fill="#1e1b4b" stroke="#c4b5fd" stroke-width="1"/>
+  <circle cx="1300" cy="290" r="30" fill="#f472b6" opacity="0.8"/>
+  <rect x="1220" y="340" width="160" height="6" rx="3" fill="#ddd6fe"/>
+  <text x="120" y="250" fill="white" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="52" font-weight="700">YOLO 视觉算法</text>
+  <text x="120" y="320" fill="#e9d5ff" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="26">目标检测 · 视觉导航 · 智能识别</text>
+  <text x="120" y="380" fill="#c4b5fd" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18" opacity="0.85">从 OpenCV 入门到深度学习实战</text>
+</svg>

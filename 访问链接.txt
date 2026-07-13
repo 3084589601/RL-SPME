@@ -1,0 +1,12 @@
+本机访问：http://localhost:3000
+公网访问：https://smoking-proposal-stockings-cultural.trycloudflare.com
+
+管理员账号：admin / admin123
+
+新增功能（v2.0）：
+  📊 个人中心：学习统计动态饼图、观看历史、喜欢列表、收藏列表
+  🔧 账号设置：修改密码、更换头像
+  🧾 发票管理：成员上传 PDF 发票、管理员单份下载/批量打包/全站打包
+
+说明：请在 DNSHE 控制台将域名解析指向本机公网 IP 的 3000 端口。
+启动网站请双击「启动网站.bat」或运行 npm run public

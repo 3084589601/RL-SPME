@@ -1,0 +1,20 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /profile
+
+Sitemap: https://gzmu-robot-lab.trycloudflare.com/sitemap.xml
+
+User-agent: Baiduspider
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /profile
+Crawl-delay: 2
+
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /api
+Disallow: /profile

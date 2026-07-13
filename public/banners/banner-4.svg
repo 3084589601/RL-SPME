@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 600" fill="none">
+  <defs>
+    <linearGradient id="bg4" x1="1920" y1="0" x2="0" y2="600" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7c2d12"/>
+      <stop offset="0.5" stop-color="#c2410c"/>
+      <stop offset="1" stop-color="#f97316"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="600" fill="url(#bg4)"/>
+  <circle cx="400" cy="150" r="120" fill="#fdba74" opacity="0.2"/>
+  <polygon points="1200,400 1280,220 1360,400" fill="#fed7aa" opacity="0.3"/>
+  <rect x="1180" y="180" width="200" height="200" rx="100" fill="none" stroke="#ffedd5" stroke-width="3" opacity="0.5"/>
+  <path d="M1280 250 L1310 290 L1250 290 Z" fill="#fbbf24"/>
+  <text x="120" y="250" fill="white" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="52" font-weight="700">机器人竞赛</text>
+  <text x="120" y="320" fill="#ffedd5" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="26">RoboMaster · 智能车 · 人工智能大赛</text>
+  <text x="120" y="380" fill="#fed7aa" font-family="Segoe UI, Microsoft YaHei, sans-serif" font-size="18" opacity="0.85">历届参赛作品与源代码开放共享</text>
+</svg>

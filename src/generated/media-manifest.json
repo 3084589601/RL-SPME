@@ -1,0 +1,213 @@
+{
+  "logoCutout": "/实验室LOGO/logo.webp",
+  "logoWhite": "/实验室LOGO/logo.webp",
+  "carousel": [
+    {
+      "id": "carousel-0",
+      "title": "",
+      "subtitle": null,
+      "imageUrl": "/轮播图片/1.webp",
+      "link": null
+    },
+    {
+      "id": "carousel-1",
+      "title": "",
+      "subtitle": null,
+      "imageUrl": "/轮播图片/2.webp",
+      "link": null
+    },
+    {
+      "id": "carousel-2",
+      "title": "",
+      "subtitle": null,
+      "imageUrl": "/轮播图片/3.webp",
+      "link": null
+    },
+    {
+      "id": "carousel-3",
+      "title": "",
+      "subtitle": null,
+      "imageUrl": "/轮播图片/4.webp",
+      "link": null
+    }
+  ],
+  "highlights": [
+    {
+      "id": "highlight-0",
+      "title": "1",
+      "description": null,
+      "imageUrl": "/精彩瞬间/1.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-1",
+      "title": "2",
+      "description": null,
+      "imageUrl": "/精彩瞬间/2.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-2",
+      "title": "3",
+      "description": null,
+      "imageUrl": "/精彩瞬间/3.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-3",
+      "title": "4",
+      "description": null,
+      "imageUrl": "/精彩瞬间/4.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-4",
+      "title": "5",
+      "description": null,
+      "imageUrl": "/精彩瞬间/5.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-5",
+      "title": "6",
+      "description": null,
+      "imageUrl": "/精彩瞬间/6.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-6",
+      "title": "7",
+      "description": null,
+      "imageUrl": "/精彩瞬间/7.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-7",
+      "title": "8",
+      "description": null,
+      "imageUrl": "/精彩瞬间/8.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-8",
+      "title": "9",
+      "description": null,
+      "imageUrl": "/精彩瞬间/9.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-9",
+      "title": "10",
+      "description": null,
+      "imageUrl": "/精彩瞬间/10.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-10",
+      "title": "11",
+      "description": null,
+      "imageUrl": "/精彩瞬间/11.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-11",
+      "title": "12",
+      "description": null,
+      "imageUrl": "/精彩瞬间/12.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-12",
+      "title": "13",
+      "description": null,
+      "imageUrl": "/精彩瞬间/13.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-13",
+      "title": "14",
+      "description": null,
+      "imageUrl": "/精彩瞬间/14.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-14",
+      "title": "15",
+      "description": null,
+      "imageUrl": "/精彩瞬间/15.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-15",
+      "title": "16",
+      "description": null,
+      "imageUrl": "/精彩瞬间/16.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-16",
+      "title": "17",
+      "description": null,
+      "imageUrl": "/精彩瞬间/17.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-17",
+      "title": "18",
+      "description": null,
+      "imageUrl": "/精彩瞬间/18.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-18",
+      "title": "19",
+      "description": null,
+      "imageUrl": "/精彩瞬间/19.webp",
+      "year": null
+    },
+    {
+      "id": "highlight-19",
+      "title": "20",
+      "description": null,
+      "imageUrl": "/精彩瞬间/20.webp",
+      "year": null
+    }
+  ],
+  "certificates": [
+    {
+      "id": "cert-0",
+      "title": "2025年第八届中国高校智能机器人创意大赛一等奖",
+      "description": null,
+      "imageUrl": "/荣誉证书/2025年第八届中国高校智能机器人创意大赛一等奖.webp",
+      "year": null
+    },
+    {
+      "id": "cert-1",
+      "title": "第二十七届中国机器人及人工智能大赛贵州赛区二等奖",
+      "description": null,
+      "imageUrl": "/荣誉证书/第二十七届中国机器人及人工智能大赛贵州赛区二等奖.webp",
+      "year": null
+    },
+    {
+      "id": "cert-2",
+      "title": "第二十七届中国机器人及人工智能大赛全国总决赛三等奖",
+      "description": null,
+      "imageUrl": "/荣誉证书/第二十七届中国机器人及人工智能大赛全国总决赛三等奖.webp",
+      "year": null
+    },
+    {
+      "id": "cert-3",
+      "title": "第二十七届中国机器人及人工智能大赛全国总决赛优秀奖",
+      "description": null,
+      "imageUrl": "/荣誉证书/第二十七届中国机器人及人工智能大赛全国总决赛优秀奖.webp",
+      "year": null
+    },
+    {
+      "id": "cert-4",
+      "title": "第二十五届全国大学生机器人大赛-RoboMaster2026机甲大师高校联盟赛-步兵对抗赛优秀奖",
+      "description": null,
+      "imageUrl": "/荣誉证书/第二十五届全国大学生机器人大赛-RoboMaster2026机甲大师高校联盟赛-步兵对抗赛优秀奖.webp",
+      "year": null
+    }
+  ]
+}
