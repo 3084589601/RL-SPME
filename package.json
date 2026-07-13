@@ -12,14 +12,7 @@
     "optimize:images": "node scripts/optimize-uploads.js",
     "optimize:media": "node scripts/optimize-folder-media.js",
     "optimize:all": "node scripts/optimize-folder-media.js && node scripts/optimize-uploads.js",
-    "deploy": "npm run build && npm run start",
-    "public": "powershell -ExecutionPolicy Bypass -File ./start-public.ps1",
-    "public:cpolar": "powershell -ExecutionPolicy Bypass -File ./start-cpolar.ps1",
-    "public:sync": "powershell -ExecutionPolicy Bypass -File ./sync-cpolar-url.ps1",
-    "public:install": "powershell -ExecutionPolicy Bypass -File ./install-public-task.ps1",
-    "public:uninstall": "powershell -ExecutionPolicy Bypass -File ./install-public-task.ps1 -Uninstall",
-    "public:cloudflare": "powershell -ExecutionPolicy Bypass -File ./start-cloudflare.ps1",
-    "public:cloudflare:perm": "powershell -ExecutionPolicy Bypass -File ./start-cloudflare-permanent.ps1"
+    "deploy": "npm run build && npm run start"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
