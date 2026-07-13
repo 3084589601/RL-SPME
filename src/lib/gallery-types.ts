@@ -128,25 +128,6 @@ export function toWorkDetail(item: {
   };
 }
 
-export function bilibiliEmbedUrl(url: string): string | null {
-  const normalized = url.trim();
-  const bvid = normalized.match(/BV[\w]+/i)?.[0];
-  if (bvid) {
-    return `https://player.bilibili.com/player.html?isOutside=true&bvid=${bvid}&page=1&high_quality=1&danmaku=0&as_wide=1`;
-  }
-  const aidMatch = normalized.match(/(?:\/video\/)?av(\d+)/i);
-  if (aidMatch) {
-    return `https://player.bilibili.com/player.html?isOutside=true&aid=${aidMatch[1]}&page=1&high_quality=1&danmaku=0&as_wide=1`;
-  }
-  if (/bilibili\.com/i.test(normalized)) {
-    const mobileBvid = normalized.match(/bvid=([^&]+)/i)?.[1];
-    if (mobileBvid) {
-      return `https://player.bilibili.com/player.html?isOutside=true&bvid=${mobileBvid}&page=1&high_quality=1&danmaku=0&as_wide=1`;
-    }
-  }
-  return null;
-}
-
 export function youtubeEmbedUrl(url: string): string | null {
   try {
     const parsed = new URL(url);
@@ -176,8 +157,6 @@ export function resolveVideoEmbed(url: string | null | undefined): VideoEmbed | 
   if (trimmed.startsWith("/uploads/videos/") || NATIVE_VIDEO.test(trimmed)) {
     return { kind: "native", src: trimmed };
   }
-  const bili = bilibiliEmbedUrl(trimmed);
-  if (bili) return { kind: "iframe", src: bili };
   const yt = youtubeEmbedUrl(trimmed);
   if (yt) return { kind: "iframe", src: yt };
   if (/^https?:\/\//i.test(trimmed)) return { kind: "iframe", src: trimmed };

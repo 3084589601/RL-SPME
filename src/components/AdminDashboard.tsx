@@ -119,6 +119,30 @@ export function AdminDashboard({
   const router = useRouter();
   const toast = useToast();
   const [tab, setTab] = useState<Tab>("users");
+  const DEFAULT_OVERVIEW_STATS = [
+    { label: "学习资源", value: 500, suffix: "+" },
+    { label: "荣誉证书", value: 20, suffix: "+" },
+    { label: "现有成员", value: 30, suffix: "+" },
+    { label: "历届成员", value: 4, suffix: "届" },
+    { label: "竞赛作品", value: 10, suffix: "+" },
+  ];
+
+  function normalizeOverviewStats(raw: unknown): typeof DEFAULT_OVERVIEW_STATS {
+    if (Array.isArray(raw) && raw.length > 0) return raw as typeof DEFAULT_OVERVIEW_STATS;
+    // 兼容旧格式（固定对象 → 数组）
+    if (raw && typeof raw === "object" && !Array.isArray(raw)) {
+      const old = raw as Record<string, number>;
+      return [
+        { label: "学习资源", value: old.resources ?? 500, suffix: "+" },
+        { label: "荣誉证书", value: old.certificates ?? 20, suffix: "+" },
+        { label: "现有成员", value: old.alumniMembers ?? 30, suffix: "+" },
+        { label: "历届成员", value: 4, suffix: "届" },
+        { label: "竞赛作品", value: old.competitionWorks ?? 10, suffix: "+" },
+      ];
+    }
+    return DEFAULT_OVERVIEW_STATS;
+  }
+
   const [contentForm, setContentForm] = useState(() => {
     try {
       const parsed = JSON.parse(siteContent);
@@ -138,19 +162,14 @@ export function AdminDashboard({
         contact: parsed.contact || "",
         contactInfo,
         recruitment: parsed.recruitment || { intro: "", requirements: [], applyNote: "" },
-        overviewStats: parsed.overviewStats || {
-          resources: 500,
-          certificates: 20,
-          alumniMembers: 3,
-          competitionWorks: 10,
-        },
+        overviewStats: normalizeOverviewStats(parsed.overviewStats),
       };
     } catch {
       return {
         overview: "", equipment: [], research: [], competitions: [], faculty: [], studentAdmins: [], contact: "",
         contactInfo: { address: "", email: "", phone: "", hours: "" },
         recruitment: { intro: "", requirements: [], applyNote: "" },
-        overviewStats: { resources: 500, certificates: 20, alumniMembers: 3, competitionWorks: 10 },
+        overviewStats: DEFAULT_OVERVIEW_STATS,
       };
     }
   });
@@ -436,34 +455,76 @@ export function AdminDashboard({
           <div className="mt-4 space-y-4">
             <div>
               <label className="block text-sm font-medium mb-2">首页实验室概览数据</label>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {[
-                  { key: "resources", label: "学习资源" },
-                  { key: "certificates", label: "荣誉证书" },
-                  { key: "alumniMembers", label: "历届成员" },
-                  { key: "competitionWorks", label: "竞赛作品" },
-                ].map(({ key, label }) => (
-                  <div key={key}>
-                    <label className="block text-xs text-gray-500 mb-1">{label}</label>
-                    <div className="flex items-center gap-1">
+              <div className="space-y-3">
+                {(contentForm.overviewStats || []).map((item: { label: string; value: number; suffix: string }, index: number) => (
+                  <div key={index} className="flex items-center gap-2 p-3 bg-gray-50 rounded-lg">
+                    <div className="flex-1 min-w-0">
+                      <label className="block text-xs text-gray-400 mb-0.5">标签</label>
+                      <input
+                        type="text"
+                        placeholder="如：学习资源"
+                        value={item.label}
+                        onChange={(e) => {
+                          const updated = [...(contentForm.overviewStats || [])];
+                          updated[index] = { ...updated[index], label: e.target.value };
+                          setContentForm({ ...contentForm, overviewStats: updated });
+                        }}
+                        className="w-full px-3 py-2 border rounded-lg text-sm"
+                      />
+                    </div>
+                    <div className="w-24 shrink-0">
+                      <label className="block text-xs text-gray-400 mb-0.5">数值</label>
                       <input
                         type="number"
                         min={0}
-                        value={contentForm.overviewStats?.[key as keyof typeof contentForm.overviewStats] ?? 0}
-                        onChange={(e) => setContentForm({
-                          ...contentForm,
-                          overviewStats: {
-                            ...contentForm.overviewStats,
-                            [key]: Math.max(0, parseInt(e.target.value, 10) || 0),
-                          },
-                        })}
+                        value={item.value}
+                        onChange={(e) => {
+                          const updated = [...(contentForm.overviewStats || [])];
+                          updated[index] = { ...updated[index], value: Math.max(0, parseInt(e.target.value, 10) || 0) };
+                          setContentForm({ ...contentForm, overviewStats: updated });
+                        }}
                         className="w-full px-3 py-2 border rounded-lg text-sm"
                       />
-                      <span className="text-sm text-gray-500 shrink-0">+</span>
                     </div>
+                    <div className="w-20 shrink-0">
+                      <label className="block text-xs text-gray-400 mb-0.5">后缀</label>
+                      <input
+                        type="text"
+                        placeholder="+"
+                        value={item.suffix}
+                        onChange={(e) => {
+                          const updated = [...(contentForm.overviewStats || [])];
+                          updated[index] = { ...updated[index], suffix: e.target.value };
+                          setContentForm({ ...contentForm, overviewStats: updated });
+                        }}
+                        className="w-full px-3 py-2 border rounded-lg text-sm"
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const updated = (contentForm.overviewStats || []).filter((_: unknown, i: number) => i !== index);
+                        setContentForm({ ...contentForm, overviewStats: updated });
+                      }}
+                      className="text-red-400 hover:text-red-600 p-1 mt-5 shrink-0 transition-colors"
+                      title="删除此项"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
                   </div>
                 ))}
               </div>
+              <button
+                type="button"
+                onClick={() => {
+                  const updated = [...(contentForm.overviewStats || []), { label: "", value: 0, suffix: "" }];
+                  setContentForm({ ...contentForm, overviewStats: updated });
+                }}
+                className="mt-3 inline-flex items-center gap-1.5 text-xs text-primary hover:text-primary/80 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                添加统计项
+              </button>
             </div>
             <div>
               <label className="block text-sm font-medium mb-1">实验室简介</label>

@@ -6,7 +6,7 @@ import { GznuPanel } from "@/components/InnerPageLayout";
 import { GznuSectionHead } from "@/components/GznuSectionHead";
 import { FastImg } from "@/components/FastImg";
 import { useImagePreload } from "@/hooks/useImagePreload";
-import { type WorkDetailData, bilibiliEmbedUrl } from "@/lib/gallery-types";
+import { type WorkDetailData } from "@/lib/gallery-types";
 import { isDisplayableMedia, toDisplayUrl, toThumbUrl } from "@/lib/media-url";
 
 function hasMedia(url: string | null | undefined): url is string {
@@ -51,22 +51,6 @@ function DemoVideo({ url }: { url: string | null }) {
       <video src={url} controls className="w-full aspect-video bg-black" preload="auto">
         您的浏览器不支持视频播放
       </video>
-    );
-  }
-
-  const embedUrl = bilibiliEmbedUrl(url);
-  if (embedUrl) {
-    return (
-      <div className="relative aspect-video bg-black overflow-hidden">
-        <iframe
-          src={embedUrl}
-          title="作品运行演示"
-          className="absolute inset-0 w-full h-full"
-          allowFullScreen
-          scrolling="no"
-          frameBorder="0"
-        />
-      </div>
     );
   }
 

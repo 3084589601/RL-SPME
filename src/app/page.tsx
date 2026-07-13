@@ -1,7 +1,6 @@
 import Link from "next/link";
 import manifest from "@/generated/media-manifest.json";
-import { DEFAULT_LAB_INTRO } from "@/lib/site-content";
-import { getCachedHomeCertificates, getCachedHomeCarousel } from "@/lib/cached-data";
+import { getCachedHomeCertificates, getCachedHomeCarousel, getCachedLabIntro } from "@/lib/cached-data";
 import { HomeHeroCarousel } from "@/components/HomeHeroCarousel";
 import { ImagePreloads } from "@/components/ImagePreloads";
 import { HomeHighlights, HomeCertificates } from "@/components/HomeSections";
@@ -16,7 +15,7 @@ import { TECH_CATEGORIES } from "@/lib/utils";
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const { overviewStats } = DEFAULT_LAB_INTRO;
+  const { overviewStats } = await getCachedLabIntro();
   const slides = await getCachedHomeCarousel();
   const highlightItems = manifest.highlights;
   const certificates = await getCachedHomeCertificates();
@@ -79,11 +78,10 @@ export default async function HomePage() {
             <h2 className="text-2xl md:text-3xl font-bold">实验室概览</h2>
             <p className="text-blue-100 text-sm uppercase tracking-wider mt-1">Overview</p>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            <StatCounter value={overviewStats.resources} suffix="+" label="学习资源" light />
-            <StatCounter value={overviewStats.certificates} suffix="+" label="荣誉证书" light />
-            <StatCounter value={overviewStats.alumniMembers} suffix="+" label="历届成员" light />
-            <StatCounter value={overviewStats.competitionWorks} suffix="+" label="竞赛作品" light />
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
+            {overviewStats.map((stat, i) => (
+              <StatCounter key={i} value={stat.value} suffix={stat.suffix} label={stat.label} light />
+            ))}
           </div>
         </div>
       </section>

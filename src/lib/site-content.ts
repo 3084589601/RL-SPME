@@ -61,12 +61,13 @@ export type RecruitmentInfo = {
   applyNote: string;
 };
 
-export type OverviewStats = {
-  resources: number;
-  certificates: number;
-  alumniMembers: number;
-  competitionWorks: number;
+export type OverviewStatItem = {
+  label: string;
+  value: number;
+  suffix: string;
 };
+
+export type OverviewStats = OverviewStatItem[];
 
 export type LabIntroContent = {
   overview: string;
@@ -214,12 +215,13 @@ export const DEFAULT_LAB_INTRO: LabIntroContent = {
     ],
     applyNote: "请将个人简介、联系方式及兴趣方向发送至实验室邮箱，或通过成员登录提交申请。招新时间：每年 3 月、9 月。",
   },
-  overviewStats: {
-    resources: 500,
-    certificates: 20,
-    alumniMembers: 3,
-    competitionWorks: 10,
-  },
+  overviewStats: [
+    { label: "学习资源", value: 500, suffix: "+" },
+    { label: "荣誉证书", value: 20, suffix: "+" },
+    { label: "现有成员", value: 30, suffix: "+" },
+    { label: "历届成员", value: 4, suffix: "届" },
+    { label: "竞赛作品", value: 10, suffix: "+" },
+  ],
 };
 
 export type CarouselSlideData = {
@@ -327,12 +329,20 @@ function resolveOverviewStats(parsed: Partial<LabIntroContent>): OverviewStats {
   const d = DEFAULT_LAB_INTRO.overviewStats;
   const s = parsed.overviewStats;
   if (!s) return d;
-  return {
-    resources: s.resources ?? d.resources,
-    certificates: s.certificates ?? d.certificates,
-    alumniMembers: s.alumniMembers ?? d.alumniMembers,
-    competitionWorks: s.competitionWorks ?? d.competitionWorks,
-  };
+  // 新格式（数组）
+  if (Array.isArray(s) && s.length > 0) return s as OverviewStats;
+  // 兼容旧格式（固定对象）
+  if (!Array.isArray(s)) {
+    const old = s as Record<string, number>;
+    return [
+      { label: "学习资源", value: old.resources ?? 500, suffix: "+" },
+      { label: "荣誉证书", value: old.certificates ?? 20, suffix: "+" },
+      { label: "现有成员", value: old.alumniMembers ?? 30, suffix: "+" },
+      { label: "历届成员", value: 4, suffix: "届" },
+      { label: "竞赛作品", value: old.competitionWorks ?? 10, suffix: "+" },
+    ];
+  }
+  return d;
 }
 
 export function buildContactText(info: ContactInfo): string {

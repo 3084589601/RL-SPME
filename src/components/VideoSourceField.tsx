@@ -63,7 +63,7 @@ export function VideoSourceField({
             onVideoUrlChange(e.target.value);
             if (e.target.value) onVideoFileChange(null);
           }}
-          placeholder="B站 / YouTube / MP4 直链等"
+          placeholder="YouTube / MP4 直链等"
           disabled={disabled || uploading}
           className="w-full rounded-lg border px-3 py-2 text-sm focus:border-primary focus-visible:outline-none focus:ring-1 focus:ring-primary/30"
         />

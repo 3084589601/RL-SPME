@@ -1,0 +1,12 @@
+{
+  "emeraldwalk.runonsave": {
+    "autoClearConsole": false,
+    "commands": [
+      {
+        "match": ".*",
+        "isAsync": true,
+        "cmd": "cd \"${workspaceFolder}\" && git add -A && git commit -m \"auto: updated\" && git push"
+      }
+    ]
+  }
+}

@@ -25,12 +25,13 @@ export type RecruitmentInfo = {
   applyNote: string;
 };
 
-export type OverviewStats = {
-  resources: number;
-  certificates: number;
-  alumniMembers: number;
-  competitionWorks: number;
+export type OverviewStatItem = {
+  label: string;
+  value: number;
+  suffix: string;
 };
+
+export type OverviewStats = OverviewStatItem[];
 
 export type LabIntroContent = {
   overview: string;
@@ -127,11 +128,12 @@ export const DEFAULT_LAB_INTRO: LabIntroContent = {
     ],
     applyNote: "请将个人简介、联系方式及兴趣方向发送至实验室邮箱，或通过成员登录提交申请。招新时间：每年 3 月、9 月。",
   },
-  overviewStats: {
-    resources: 500,
-    certificates: 20,
-    alumniMembers: 3,
-    competitionWorks: 10,
-  },
+  overviewStats: [
+    { label: "学习资源", value: 500, suffix: "+" },
+    { label: "荣誉证书", value: 20, suffix: "+" },
+    { label: "现有成员", value: 30, suffix: "+" },
+    { label: "历届成员", value: 4, suffix: "届" },
+    { label: "竞赛作品", value: 10, suffix: "+" },
+  ],
 };
 

@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { Plus, Trash2, Save, Upload, Loader2, Search, X } from "lucide-react";
+import { Plus, Trash2, Save, Upload, Loader2, Search, X, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { useToast } from "@/hooks/useToast";
 import {
@@ -151,6 +151,32 @@ export function AdminCarouselPanel({ initialSlides }: { initialSlides: CarouselS
   const [uploadingIndex, setUploadingIndex] = useState<number | null>(null);
   const toast = useToast();
 
+  async function resetFromFolder() {
+    if (!confirm("将从轮播图片文件夹重新加载，之前保存的轮播设置将被清除。确认？")) return;
+    setSaving(true);
+    try {
+      // 先删除数据库中的保存版，让它回退到文件夹
+      await fetch("/api/admin/content?key=home_carousel", { method: "DELETE", credentials: "same-origin" });
+      // 再获取文件夹中的图片列表
+      const res = await fetch("/api/admin/content?key=home_carousel&from=folder", { credentials: "same-origin" });
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.content) && data.content.length > 0) {
+          setSlides(data.content);
+          toast.success(`已从文件夹加载 ${data.content.length} 张图片`);
+        } else {
+          setSlides([]);
+          toast.success("已重置，文件夹中暂无图片");
+        }
+      }
+      router.refresh();
+    } catch (e) {
+      toast.error(e instanceof Error ? e.message : "重置失败");
+    } finally {
+      setSaving(false);
+    }
+  }
+
   function updateSlide(index: number, patch: Partial<CarouselSlideData>) {
     setSlides((prev) => prev.map((s, i) => (i === index ? { ...s, ...patch } : s)));
   }
@@ -211,6 +237,9 @@ export function AdminCarouselPanel({ initialSlides }: { initialSlides: CarouselS
           <p className="text-xs text-gray-500 mt-1">上传图片后会自动保存；也可修改标题后点「保存轮播」</p>
         </div>
         <div className="flex gap-2">
+          <Button size="sm" variant="outline" onClick={resetFromFolder} disabled={saving}>
+            <RefreshCw className="w-4 h-4" />从文件夹恢复
+          </Button>
           <Button size="sm" variant="outline" onClick={addSlide}><Plus className="w-4 h-4" />添加</Button>
           <Button size="sm" onClick={() => saveSlides(slides)} disabled={saving}>
             <Save className="w-4 h-4" />保存轮播
@@ -713,7 +742,7 @@ export function AdminGalleryPanel({ items }: { items: GalleryItemRow[] }) {
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">作品运行演示</label>
                 <input
-                  placeholder="B站链接（如 https://www.bilibili.com/video/BVxxx）或已上传视频地址"
+                  placeholder="视频链接或已上传视频地址"
                   value={form.demoVideo}
                   onChange={(e) => setForm((prev) => ({ ...prev, demoVideo: e.target.value }))}
                   className="w-full px-3 py-2 border rounded-lg text-sm"

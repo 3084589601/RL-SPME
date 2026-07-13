@@ -238,7 +238,7 @@ async function main() {
 
   const workHighlights = (demoIndex: number, momentStart: number) =>
     JSON.stringify({
-      demoVideo: "https://www.bilibili.com/video/BV1xx411c7mD",
+      demoVideo: "",
       momentImages: momentImages(momentStart),
     });
 
@@ -437,50 +437,50 @@ async function main() {
     },
     {
       title: "YOLOv8 目标检测训练教程",
-      description: "B站视频：从零开始训练自定义数据集",
+      description: "从零开始训练自定义数据集",
       type: "VIDEO",
       category: "VISION",
-      videoUrl: "https://www.bilibili.com/video/BV1xx411c7mD",
+      videoUrl: "",
       status: ResourceStatus.APPROVED,
     },
     {
       title: "OpenCV 图像处理入门",
-      description: "B站视频：OpenCV基础与实战",
+      description: "OpenCV基础与实战",
       type: "VIDEO",
       category: "VISION",
-      videoUrl: "https://www.bilibili.com/video/BV1GJ411x7h7",
+      videoUrl: "",
       status: ResourceStatus.APPROVED,
     },
     {
       title: "微信小程序云开发入门",
-      description: "B站视频：小程序+云数据库实战",
+      description: "小程序+云数据库实战",
       type: "VIDEO",
       category: "WECHAT_MINI",
-      videoUrl: "https://www.bilibili.com/video/BV1S4411c7Q4",
+      videoUrl: "",
       status: ResourceStatus.APPROVED,
     },
     {
       title: "LangChain 大模型应用开发",
-      description: "B站视频：基于LangChain构建AI应用",
+      description: "基于LangChain构建AI应用",
       type: "VIDEO",
       category: "AI_LLM",
-      videoUrl: "https://www.bilibili.com/video/BV1Lh411P7qE",
+      videoUrl: "",
       status: ResourceStatus.APPROVED,
     },
     {
       title: "PCB 设计入门（嘉立创 EDA）",
-      description: "B站视频：从原理图到 PCB 布局基础",
+      description: "从原理图到 PCB 布局基础",
       type: "VIDEO",
       category: "PCB",
-      videoUrl: "https://www.bilibili.com/video/BV1xx411c7mD",
+      videoUrl: "",
       status: ResourceStatus.APPROVED,
     },
     {
       title: "SolidWorks 三维建模基础",
-      description: "B站视频：零件建模与装配入门",
+      description: "零件建模与装配入门",
       type: "VIDEO",
       category: "SOLIDWORKS",
-      videoUrl: "https://www.bilibili.com/video/BV1GJ411x7h7",
+      videoUrl: "",
       status: ResourceStatus.APPROVED,
     },
     {

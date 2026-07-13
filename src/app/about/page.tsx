@@ -21,27 +21,19 @@ export default async function AboutIntroPage() {
         </article>
 
         {/* 统计数据 */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <div className="gznu-panel bg-white border border-gray-100 p-5 text-center hover:border-primary/30 transition-colors">
-            <BookOpen className="w-7 h-7 text-primary mx-auto mb-2" />
-            <div className="text-2xl font-bold text-gray-900">{data.overviewStats.resources}</div>
-            <div className="text-sm text-gray-500 mt-1">资源总数</div>
-          </div>
-          <div className="gznu-panel bg-white border border-gray-100 p-5 text-center hover:border-primary/30 transition-colors">
-            <Trophy className="w-7 h-7 text-amber-500 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-gray-900">{data.overviewStats.certificates}</div>
-            <div className="text-sm text-gray-500 mt-1">获奖证书</div>
-          </div>
-          <div className="gznu-panel bg-white border border-gray-100 p-5 text-center hover:border-primary/30 transition-colors">
-            <Users className="w-7 h-7 text-green-500 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-gray-900">{data.overviewStats.alumniMembers}</div>
-            <div className="text-sm text-gray-500 mt-1">核心成员</div>
-          </div>
-          <div className="gznu-panel bg-white border border-gray-100 p-5 text-center hover:border-primary/30 transition-colors">
-            <Cpu className="w-7 h-7 text-purple-500 mx-auto mb-2" />
-            <div className="text-2xl font-bold text-gray-900">{data.overviewStats.competitionWorks}</div>
-            <div className="text-sm text-gray-500 mt-1">竞赛作品</div>
-          </div>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          {data.overviewStats.map((stat, i) => {
+            const icons = [BookOpen, Trophy, Users, Cpu, BookOpen];
+            const colors = ["text-primary", "text-amber-500", "text-green-500", "text-purple-500", "text-primary"];
+            const Icon = icons[i % icons.length];
+            return (
+              <div key={i} className="gznu-panel bg-white border border-gray-100 p-5 text-center hover:border-primary/30 transition-colors">
+                <Icon className={`w-7 h-7 ${colors[i % colors.length]} mx-auto mb-2`} />
+                <div className="text-2xl font-bold text-gray-900">{stat.value}{stat.suffix}</div>
+                <div className="text-sm text-gray-500 mt-1">{stat.label}</div>
+              </div>
+            );
+          })}
         </div>
 
         {/* 快速导航 */}
