@@ -1,4 +1,4 @@
-const OPTIMIZED_MEDIA = /^\/(轮播图片|精彩瞬间|荣誉证书|实验室LOGO|uploads)\//;
+const OPTIMIZED_MEDIA = /^\/(轮播图片|精彩瞬间|荣誉证书|实验室LOGO)\//;
 
 export function isPlaceholderMedia(url: string | null | undefined): boolean {
   if (!url?.trim()) return true;
