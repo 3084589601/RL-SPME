@@ -15,7 +15,14 @@ import { TECH_CATEGORIES } from "@/lib/utils";
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const { overviewStats } = await getCachedLabIntro();
+  const { overviewStats: rawStats } = await getCachedLabIntro();
+  const overviewStats = Array.isArray(rawStats) ? rawStats : [
+    { label: "学习资源", value: 500, suffix: "+" },
+    { label: "荣誉证书", value: 20, suffix: "+" },
+    { label: "现有成员", value: 30, suffix: "+" },
+    { label: "历届成员", value: 4, suffix: "届" },
+    { label: "竞赛作品", value: 10, suffix: "+" },
+  ];
   const slides = await getCachedHomeCarousel();
   const highlightItems = manifest.highlights;
   const certificates = await getCachedHomeCertificates();

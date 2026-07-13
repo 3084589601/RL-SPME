@@ -5,8 +5,17 @@ import { Users, Trophy, Cpu, BookOpen } from "lucide-react";
 
 export const revalidate = 300;
 
+const FALLBACK_STATS = [
+  { label: "学习资源", value: 500, suffix: "+" },
+  { label: "荣誉证书", value: 20, suffix: "+" },
+  { label: "现有成员", value: 30, suffix: "+" },
+  { label: "历届成员", value: 4, suffix: "届" },
+  { label: "竞赛作品", value: 10, suffix: "+" },
+];
+
 export default async function AboutIntroPage() {
   const data = await getCachedLabIntro();
+  const stats = Array.isArray(data.overviewStats) ? data.overviewStats : FALLBACK_STATS;
 
   return (
     <AboutPageShell>
@@ -22,7 +31,7 @@ export default async function AboutIntroPage() {
 
         {/* 统计数据 */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
-          {data.overviewStats.map((stat, i) => {
+          {stats.map((stat, i) => {
             const icons = [BookOpen, Trophy, Users, Cpu, BookOpen];
             const colors = ["text-primary", "text-amber-500", "text-green-500", "text-purple-500", "text-primary"];
             const Icon = icons[i % icons.length];
