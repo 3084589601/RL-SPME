@@ -34,7 +34,6 @@ export default async function HomePage() {
   const preloadUrls = [
     ...slides.slice(0, 1).map((s) => toDisplayUrl(s.imageUrl)),
   ];
-  ];
 
   return (
     <div>

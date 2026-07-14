@@ -31,10 +31,6 @@ const nextConfig: NextConfig = {
       { source: "/实验室LOGO/:path*", headers: cache },
     ];
   },
-  webpack: (config, { dev }) => {
-    if (!dev) config.cache = false;
-    return config;
-  },
 };
 
 export default nextConfig;

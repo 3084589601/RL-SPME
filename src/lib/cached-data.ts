@@ -32,7 +32,7 @@ export const getCachedHomeCarousel = unstable_cache(
 export const getCachedLabIntro = unstable_cache(
   async (): Promise<LabIntroContent> => getLabIntro(),
   ["lab-intro"],
-  { revalidate: 60, tags: ["lab-intro"] }
+  { revalidate: PUBLIC_REVALIDATE, tags: ["lab-intro"] }
 );
 
 export const getCachedGalleryItems = unstable_cache(
