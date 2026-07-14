@@ -15,7 +15,11 @@ import { TECH_CATEGORIES } from "@/lib/utils";
 export const revalidate = 300;
 
 export default async function HomePage() {
-  const { overviewStats: rawStats } = await getCachedLabIntro();
+  const [{ overviewStats: rawStats }, slides, certificates] = await Promise.all([
+    getCachedLabIntro(),
+    getCachedHomeCarousel(),
+    getCachedHomeCertificates(),
+  ]);
   const overviewStats = Array.isArray(rawStats) ? rawStats : [
     { label: "学习资源", value: 500, suffix: "+" },
     { label: "荣誉证书", value: 20, suffix: "+" },
@@ -23,15 +27,13 @@ export default async function HomePage() {
     { label: "历届成员", value: 4, suffix: "届" },
     { label: "竞赛作品", value: 10, suffix: "+" },
   ];
-  const slides = await getCachedHomeCarousel();
   const highlightItems = manifest.highlights;
-  const certificates = await getCachedHomeCertificates();
   const categories = Object.entries(TECH_CATEGORIES);
 
+  // 只预加载首张轮播图，避免 30+ 个预加载抢占带宽
   const preloadUrls = [
-    ...slides.map((s) => toDisplayUrl(s.imageUrl)),
-    ...highlightItems.map((h) => toThumbUrl(h.imageUrl)),
-    ...certificates.filter((c) => isDisplayableMedia(c.imageUrl)).map((c) => toThumbUrl(c.imageUrl)),
+    ...slides.slice(0, 1).map((s) => toDisplayUrl(s.imageUrl)),
+  ];
   ];
 
   return (
