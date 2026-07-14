@@ -24,10 +24,12 @@ export function FastImg({ src, alt, className, fill, priority, useThumb = false 
   const displaySrc = toDisplayUrl(src);
   const [current, setCurrent] = useState(() => resolveSrc(src, useThumb));
   const [failed, setFailed] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     setCurrent(resolveSrc(src, useThumb));
     setFailed(false);
+    setLoaded(false);
   }, [src, useThumb]);
 
   if (failed) {
@@ -51,11 +53,17 @@ export function FastImg({ src, alt, className, fill, priority, useThumb = false 
     <img
       src={current}
       alt={alt}
-      className={cn(fill && "absolute inset-0 h-full w-full", className)}
-      loading="eager"
+      className={cn(
+        fill && "absolute inset-0 h-full w-full",
+        "bg-gray-100",
+        !loaded && "animate-pulse",
+        className
+      )}
+      loading={priority ? "eager" : "lazy"}
       decoding={priority ? "sync" : "async"}
       fetchPriority={priority ? "high" : "auto"}
       draggable={false}
+      onLoad={() => setLoaded(true)}
       onError={() => {
         if (current !== displaySrc) {
           // step 1: try display (non-thumb) URL
